@@ -8,7 +8,7 @@ import "./style.css";
 import { getWord } from "../Language";
 import axios from "axios";
 import TabSwitcher from "../TabSwitcher";
-import loginImg from "/logo/login-logo.svg"
+import loginImg from "/logo/logo-likut.svg"
 import OrderPreview from "../OrderPreview";
 
 import dayjs from 'dayjs';

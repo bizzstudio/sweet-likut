@@ -12,7 +12,7 @@ import { FaCheckCircle, FaBoxOpen, FaPlus, FaMinus, FaCheck } from "react-icons/
 import { FaXmark } from "react-icons/fa6";
 import spinnerLoadingImage from "/spinner.gif";
 import dayjs from "dayjs";
-import loginImg from "/logo/login-logo.svg"
+import loginImg from "/logo/logo-likut.svg"
 
 export default function Item({ setOrders, orders, setUpdateOrders, setId, loading, setLoading }) {
   const numberOfOrder = useParams();

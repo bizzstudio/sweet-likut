@@ -56,8 +56,10 @@
   margin-bottom: 20px;
   outline: 0;
   width: 100%;
-  background-color: rgba(6, 77, 53, 0.35);
-  color: white;
+  /* הרקע והטקסט כהה-על-בהיר. במקור זה היה טקסט לבן על ירוק שקוף למחצה מעל
+     רקע לבן (יחס ניגודיות 1.7:1) — טקסט שהוקלד היה כמעט בלתי נראה. */
+  background-color: var(--main-color-super-light);
+  color: var(--main-color-dark);
 }
 
 .form .group input:placeholder-shown+label,
@@ -65,6 +67,8 @@
   top: 8px;
   background-color: transparent;
   border: none;
+  /* התווית מרחפת בתוך השדה כשהוא ריק — חייבת להיות כהה על רקע השדה הבהיר. */
+  color: var(--main-color-dark);
 }
 
 .form .group input:focus,

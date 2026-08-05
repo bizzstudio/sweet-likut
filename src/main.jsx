@@ -7,13 +7,16 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
 // צבעי antd נגזרים מהלוגו של "מתוקיה של בני" — ראו mainColor ב-tailwind.config.js.
+// הערכים כאן הם mainColor.DEFAULT/dark ולא mainColor.brand (#0d9e6d): על הטוקנים
+// האלה יושב טקסט — כפתור primary עם תווית לבנה, קישורים, הודעות הצלחה — וירוק
+// הלוגו נותן 3.4:1 בלבד מול לבן. הגוון הכהה יותר עובר WCAG AA.
 // ה-direction לא נקבע כאן: הוא נגזר משפת המשתמש דרך document.documentElement.dir.
 const antdTheme = {
   token: {
-    colorPrimary: "#0d9e6d",
-    colorLink: "#0d9e6d",
-    colorLinkHover: "#15c188",
-    colorSuccess: "#0d9e6d",
+    colorPrimary: "#097954",
+    colorLink: "#097954",
+    colorLinkHover: "#055a3d",
+    colorSuccess: "#097954",
     fontFamily: "'Assistant', sans-serif",
   },
 };

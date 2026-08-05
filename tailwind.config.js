@@ -6,14 +6,21 @@ const config = {
     darkMode: "class",
     theme: {
         extend: {
-            // הפלטה נגזרת מלוגו "מתוקיה של בני": מילוי #0d9e6d עם קו מתאר #006300.
+            // הפלטה נגזרת מלוגו "מתוקיה של בני": מילוי #0d9e6d, קו מתאר #006300.
+            // כל הגוונים על אותו גוון (hue 160) — סולם בהירות אחד.
+            //
+            // חשוב: `brand` הוא צבע הלוגו המדויק, והניגודיות שלו מול לבן היא 3.4:1 —
+            // מספיק לאייקונים ולמסגרות (WCAG 1.4.11) אך *לא* לטקסט. לכן `DEFAULT`,
+            // שהוא צבע הפעולה שעליו יושב טקסט לבן, הוא גוון כהה יותר של אותו ירוק
+            // (5.4:1, עובר AA). אין להחליף ביניהם.
             colors: {
                 mainColor: {
-                    superLight: '#eafaf3',
-                    light: '#15c188',
-                    DEFAULT: '#0d9e6d',
-                    dark: '#0a7c56',
-                    superDark: '#006300',
+                    superLight: '#edfaf6', // רקעים מוצלים
+                    light: '#15c188',      // הדגשות וגרדיאנטים (לא לטקסט)
+                    brand: '#0d9e6d',      // מילוי הלוגו — סימנים, מסגרות, אייקונים
+                    DEFAULT: '#097954',    // צבע פעולה — 5.4:1 מול לבן
+                    dark: '#055a3d',       // hover / pressed — 8.3:1 מול לבן
+                    superDark: '#006300',  // קו המתאר של הלוגו
                 },
             },
             fontFamily: {
@@ -91,6 +98,7 @@ const config = {
                     /* Main Color */
                     '--main-color-super-light': theme('colors.mainColor.superLight'),
                     '--main-color-light': theme('colors.mainColor.light'),
+                    '--main-color-brand': theme('colors.mainColor.brand'),
                     '--main-color': theme('colors.mainColor.DEFAULT'),
                     '--main-color-dark': theme('colors.mainColor.dark'),
                     '--main-color-super-dark': theme('colors.mainColor.superDark'),

@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
-import loginImg from "/logo/login-logo.svg"
+import loginImg from "/logo/logo-likut.svg"
 import leaf from "/leaf.svg"
 import { getWord } from "../Language";
 

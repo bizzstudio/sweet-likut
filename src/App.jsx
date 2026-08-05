@@ -69,6 +69,11 @@ function App() {
     const lang = localStorage.getItem("language") || 'hebrew';
     setLanguage(lang);
     document.documentElement.dir = lang === "hebrew" ? "rtl" : "ltr";
+    // index.html מצהיר lang="he" (שפת ברירת המחדל); בלי העדכון הזה הוא נשאר "he"
+    // גם אחרי מעבר לאנגלית/הינדית, ומקריאי מסך היו הוגים את הטקסט בעברית.
+    // מפתחות השפה הם "hebrew" / "india" / "en" (ראו languageOptions ב-Language).
+    document.documentElement.lang =
+      lang === "hebrew" ? "he" : lang === "india" ? "hi" : "en";
   }, [language]);
 
   useEffect(() => {

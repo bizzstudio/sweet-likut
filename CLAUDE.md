@@ -30,19 +30,38 @@ Brand is **מתוקיה של בני**. The palette is derived from the logo and 
 `mainColor` in `tailwind.config.js`, re-exported as `--main-color*` CSS vars and fed to antd
 via the `ConfigProvider` token in `src/main.jsx`. Do not hardcode brand hex values in CSS.
 
-| token | hex | role |
-| --- | --- | --- |
-| `mainColor.DEFAULT` | `#0d9e6d` | logo fill / primary |
-| `mainColor.superDark` | `#006300` | logo outline stroke |
-| `mainColor.dark` | `#0a7c56` | hover / pressed |
-| `mainColor.light` | `#15c188` | accents |
-| `mainColor.superLight` | `#eafaf3` | tinted backgrounds |
+One hue (160°), one lightness ramp:
 
-Logo assets live in `public/logo/` and are copied from `sweet-store/public/logo` (the single
-source of truth — see `sweet-backend/lib/email-sender/brand.js` for name/address/phone).
-`login-logo.svg` is likut-specific: the wordmark plus "מערכת ליקוט", with the full
-Assistant-Bold woff2 inlined as a data URI so it renders identically everywhere.
+| token | hex | contrast vs white | role |
+| --- | --- | --- | --- |
+| `mainColor.superLight` | `#edfaf6` | — | tinted backgrounds |
+| `mainColor.light` | `#15c188` | 2.3 | gradients / accents — **never** behind text |
+| `mainColor.brand` | `#0d9e6d` | 3.4 | the exact logo fill: marks, borders, icons |
+| `mainColor.DEFAULT` | `#097954` | 5.4 | action color — anything with white text on it |
+| `mainColor.dark` | `#055a3d` | 8.3 | hover / pressed |
+| `mainColor.superDark` | `#006300` | 7.5 | the logo's outline stroke |
+
+`brand` and `DEFAULT` are **not** interchangeable. `brand` is the literal logo green, and at
+3.4:1 it clears WCAG 1.4.11 for icons and borders but fails 1.4.3 for text. Every surface that
+carries white text (`bg-mainColor`, the login button, the antd `colorPrimary`) uses `DEFAULT`.
+
+Logo assets live in `public/logo/`; the square icons come from `sweet-store/public/logo`
+(the single source of truth — see `sweet-backend/lib/email-sender/brand.js` for
+name/address/phone). `logo-likut.svg` is likut-specific: the wordmark plus "מערכת ליקוט",
+with the full Assistant-Bold woff2 inlined as a data URI so it renders identically everywhere
+without a webfont request. Keep `public/` free of unreferenced images — everything in it ships
+verbatim.
 
 ## `.env`
 
-Uses `VITE_MAIN_SERVER_URL` (the `sweet-backend` base URL, including the `/api` segment as consumed in `App.jsx`). Confirm the exact value in the local `.env` before changing API calls.
+Every `VITE_*` value is **inlined into the client bundle at build time** and is readable by
+anyone who opens devtools. `VITE_SWEET_WHATSAPP_API_KEY` is therefore not a secret; treat the
+WhatsApp service as publicly reachable and enforce authorization on its side.
+
+`.dockerignore` excludes `.env`, so each variable must also be declared as an `ARG`/`ENV` pair
+in the `Dockerfile` — a missing one silently builds to `undefined` (e.g. a POST to
+`undefined/send-order-ready`). See `.env.example` for the full list.
+
+`VITE_APP_BASE_PATH` sets Vite's `base`; `BrowserRouter` reads it back via
+`import.meta.env.BASE_URL`. If it is not `/`, the server needs a matching rewrite rule —
+`public/.htaccess` covers Apache, and `nginx.conf` (used by the Docker image) assumes `/`.

@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import logo from "/logo/logo-color.svg";
+import logo from "/logo/logo-likut.svg";
 import useLoadingStore from "../../LoadingContext";
 import { getWord } from "../Language";
 

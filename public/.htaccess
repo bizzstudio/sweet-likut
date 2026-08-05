@@ -1,0 +1,44 @@
+# =========================================================================
+# ניתוב צד-לקוח (SPA) עבור אפליקציית הליקוט המוגשת מתת-התיקייה /sweet-likut/
+#
+# בלי זה, רענון או כניסה ישירה לכתובת כמו /sweet-likut/items יחזירו 404,
+# כי אין קובץ כזה על הדיסק — הנתיב מטופל על ידי React Router בדפדפן.
+#
+# רלוונטי ל-Apache בלבד. אם השרת מריץ nginx — יש להשתמש במקום זה ב:
+#   location /sweet-likut/ { try_files $uri $uri/ /sweet-likut/index.html; }
+#
+# ה-RewriteBase חייב להתאים ל-VITE_APP_BASE_PATH שאיתו נבנה ה-dist.
+# אם האפליקציה תעבור לדומיין ייעודי — לשנות כאן ל-"/".
+# =========================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /sweet-likut/
+
+  # קבצים ותיקיות שקיימים בפועל — להגיש כרגיל (JS, CSS, תמונות)
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # כל השאר — להחזיר ל-index.html כדי שהראוטר יטפל בנתיב
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # index.html לא אמור להיות במטמון, אחרת מלקטים יישארו תקועים על גרסה
+  # ישנה אחרי כל עדכון (הוא זה שמפנה לשמות הקבצים עם ה-hash).
+  <FilesMatch "^index\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </FilesMatch>
+
+  # JS/CSS/פונטים נבנים עם hash בשם הקובץ — אפשר immutable לשנה.
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # תמונות מ-public/ (לוגו, spinner) מועתקות בשמן המקורי — בלי hash.
+  # לכן מטמון קצר: החלפת לוגו לא תיתקע אצל המלקטים לשנה.
+  <FilesMatch "\.(png|jpe?g|svg|webp|gif|ico)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>

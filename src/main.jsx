@@ -20,7 +20,10 @@ const antdTheme = {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <ConfigProvider theme={antdTheme}>
-      <BrowserRouter>
+      {/* basename נגזר מה-base של Vite (VITE_APP_BASE_PATH), כדי שהראוטר
+          יתאים לתת-התיקייה שממנה האפליקציה מוגשת. בלי זה, ניווט ל-"/items"
+          מתוך /sweet-likut/ היה קופץ לשורש הדומיין. */}
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <App />
       </BrowserRouter>
     </ConfigProvider>

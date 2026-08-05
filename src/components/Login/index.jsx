@@ -7,7 +7,7 @@ import leaf from "/leaf.svg"
 import { getWord } from "../Language";
 
 function Login() {
-    const [phone, setUsername] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -15,8 +15,12 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
+            // השדה נשלח גם כ-username וגם כ-phone: מלקטים חדשים מוגדרים
+            // באדמין עם שם משתמש, וותיקים עדיין מתחברים במספר הטלפון.
+            // השרת מחפש התאמה לכל אחד מהשניים.
             const res = await axios.post(`${import.meta.env.VITE_MAIN_SERVER_URL}/app/login`, {
-                phone,
+                username,
+                phone: username,
                 password,
             });
             localStorage.setItem("token", res.data.token);
@@ -27,7 +31,7 @@ function Login() {
         }
     };
 
-    const phoneWord = getWord('phone');
+    const usernameWord = getWord('username');
     const passwordWord = getWord('password');
     const loginWord = getWord('login');
 
@@ -41,13 +45,14 @@ function Login() {
                     <div className="group">
                         <input
                             placeholder=""
-                            type="phone"
-                            id="phone"
+                            type="text"
+                            id="username"
+                            autoComplete="username"
                             required
-                            value={phone}
+                            value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
-                        <label htmlFor="phone">{phoneWord}</label>
+                        <label htmlFor="username">{usernameWord}</label>
                     </div>
                     <div className="group">
                         <input

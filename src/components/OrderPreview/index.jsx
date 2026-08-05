@@ -4,7 +4,7 @@ import { Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { languageContext } from "../../App";
 import { getWord } from "../Language";
-import logo from "../../../public/logo.jpeg";
+import logo from "/logo/logo-square-192.png";
 import axios from "axios";
 import { FaTimes, FaCheckCircle } from "react-icons/fa";
 

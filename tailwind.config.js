@@ -6,12 +6,14 @@ const config = {
     darkMode: "class",
     theme: {
         extend: {
+            // הפלטה נגזרת מלוגו "מתוקיה של בני": מילוי #0d9e6d עם קו מתאר #006300.
             colors: {
                 mainColor: {
-                    superLight: 'rgb(252, 255, 244)',
-                    light: '#afdc34',
-                    DEFAULT: '#3c6d16',
-                    dark: '#2c510f',
+                    superLight: '#eafaf3',
+                    light: '#15c188',
+                    DEFAULT: '#0d9e6d',
+                    dark: '#0a7c56',
+                    superDark: '#006300',
                 },
             },
             fontFamily: {
@@ -91,6 +93,7 @@ const config = {
                     '--main-color-light': theme('colors.mainColor.light'),
                     '--main-color': theme('colors.mainColor.DEFAULT'),
                     '--main-color-dark': theme('colors.mainColor.dark'),
+                    '--main-color-super-dark': theme('colors.mainColor.superDark'),
                 },
             });
         },

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Select, Table } from "antd";
 import Loader from "../Loader";
 import axios from "axios";
-import logo from "../../../public/logo.jpeg";
+import logo from "/logo/logo-square-192.png";
 import { languageContext } from "../../App";
 import "./style.css";
 import { getWord } from "../Language";
@@ -12,7 +12,7 @@ import { FaCheckCircle, FaBoxOpen, FaPlus, FaMinus, FaCheck } from "react-icons/
 import { FaXmark } from "react-icons/fa6";
 import spinnerLoadingImage from "/spinner.gif";
 import dayjs from "dayjs";
-import loginImg from "/loginImg.svg"
+import loginImg from "/logo/login-logo.svg"
 
 export default function Item({ setOrders, orders, setUpdateOrders, setId, loading, setLoading }) {
   const numberOfOrder = useParams();
@@ -495,11 +495,11 @@ export default function Item({ setOrders, orders, setUpdateOrders, setId, loadin
           original_order_id: numberOfOrder.id,
           notes: `${order.customer_note ? order.customer_note + "." : ""}
   ${order.callOnArrival === false ? "נא להניח את ההזמנה ליד הדלת." : ""}`,
-          source_city: "מושב קדרון",
-          source_street: "הרימון",
-          source_number: "12",
-          source_recipient_name: "משק קרישנר",
-          source_phone: "0586692614",
+          source_city: "בני ברק",
+          source_street: "כינרת",
+          source_number: "13",
+          source_recipient_name: "מתוקיה של בני",
+          source_phone: "03-6726954",
           destination_city: order?.user_info?.address?.city?.city_name_he,
           destination_street: order?.user_info?.address?.street,
           destination_number: order?.user_info?.address?.houseNumber,

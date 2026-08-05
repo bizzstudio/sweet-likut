@@ -20,6 +20,12 @@ npm run lint     # eslint --max-warnings 0
 | `VITE_SWEET_WHATSAPP_SERVER_URL` | כתובת שירות הוואטסאפ (`sweet-whatsapp`) |
 | `VITE_SWEET_WHATSAPP_API_KEY` | מפתח API לשירות הוואטסאפ |
 
+## מיתוג
+
+הצבעים נגזרים מהלוגו ומוגדרים במקום אחד — `mainColor` ב־`tailwind.config.js`
+(מילוי `#0d9e6d`, קו מתאר `#006300`), ומשם עוברים ל־CSS vars ול־antd דרך
+ה־`ConfigProvider` ב־`src/main.jsx`. קבצי הלוגו נמצאים ב־`public/logo/`.
+
 ## Docker
 
 ```bash

@@ -21,7 +21,7 @@
 }
 
 .enabled-select .ant-select-selector {
-    border-color: green !important;
+    border-color: var(--main-color) !important;
 }
 
 .disabled-select .ant-select-selector {

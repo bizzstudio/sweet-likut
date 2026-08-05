@@ -16,7 +16,7 @@
 .coButton {
   padding: 8px 10px;
   border: none;
-  background: rgba(0, 128, 0, 0.5);
+  background: rgba(13, 158, 109, 0.5);
   color: #fff;
   font-size: 16px;
   width: 48%;
@@ -28,7 +28,7 @@
 }
 
 .selected {
-  background: green;
+  background: var(--main-color-dark);
 }
 
 .time {

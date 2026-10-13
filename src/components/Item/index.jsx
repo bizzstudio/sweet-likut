@@ -499,7 +499,9 @@ export default function Item({ setOrders, orders, setUpdateOrders, setId, loadin
           source_street: "כינרת",
           source_number: "13",
           source_recipient_name: "מתוקיה של בני",
-          source_phone: "03-6726954",
+          // טלפון המוצא שנמסר לחברת השליחויות. עודכן 30/08/26 —
+          // "03-6726954" היה מספר ישן, והשליח שהתקשר לברר כתובת הגיע לאיש אחר
+          source_phone: "050-4447055",
           destination_city: order?.user_info?.address?.city?.city_name_he,
           destination_street: order?.user_info?.address?.street,
           destination_number: order?.user_info?.address?.houseNumber,
